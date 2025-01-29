@@ -11,11 +11,14 @@ type Props = {
 function GameCard({ game }: Props) {
   return (
     <Link
-      className="flex flex-col mb-8 hover:opacity-50 transition-opacity ease-in"
+      className="flex flex-col mb-8 hover:opacity-50 transition-opacity ease-in border border-[#ffffff33] rounded-xl relative overflow-hidden"
       href={`/games/${game.slug}`}
     >
       {game.background_image && (
-        <AspectRatio ratio={9 / 14} className="relative mb-4 ">
+        <AspectRatio
+          ratio={9 / 12}
+          className="relative w-full h-full top-0 left-0 "
+        >
           <Image
             className="h-full object-cover"
             src={game.background_image}
@@ -25,8 +28,10 @@ function GameCard({ game }: Props) {
           />
         </AspectRatio>
       )}
-      <p className="text-xl font-medium">{game.name}</p>
-      <p className=" text-neutral-500 font-semibold">{game.released_at}</p>
+      <div className="absolute bottom-0 left-0 w-full bg-gradient-to-b from-transparent via-black/60 to-black/70 px-2 pt-10 pb-2">
+        <p className="text-base font-bold">{game.name}</p>
+        <p className="font-light text-xs">{game.released_at}</p>
+      </div>
     </Link>
   );
 }

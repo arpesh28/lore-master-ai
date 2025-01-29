@@ -7,8 +7,8 @@ import { CharacterCardProps } from "@/types/Game";
 const gridVariants = cva("grid gap-4", {
   variants: {
     variant: {
-      default: "grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ",
-      reduced: "grid-cols-2 md:grid-cols-3 lg:grid-cols-3",
+      default: "grid-cols-3 md:grid-cols-4 lg:grid-cols-6 ",
+      reduced: "grid-cols-2 md:grid-cols-3 lg:grid-cols-4",
     },
   },
   defaultVariants: {

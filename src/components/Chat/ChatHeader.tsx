@@ -1,17 +1,12 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-
-import { ModelSelector } from "@/components/Chat/ModalSelector";
 import { memo } from "react";
 
 function PureChatHeader({
   chatId,
-  selectedModelId,
   isReadonly,
 }: {
   chatId: string;
-  selectedModelId: string;
   isReadonly: boolean;
 }) {
   return (
@@ -34,17 +29,11 @@ function PureChatHeader({
           <TooltipContent>New Chat</TooltipContent>
         </Tooltip>
       )} */}
-
-      {!isReadonly && (
-        <ModelSelector
-          selectedModelId={selectedModelId}
-          className="order-1 md:order-2"
-        />
-      )}
     </header>
   );
 }
 
 export const ChatHeader = memo(PureChatHeader, (prevProps, nextProps) => {
-  return prevProps.selectedModelId === nextProps.selectedModelId;
+  // return prevProps.selectedModelId === nextProps.selectedModelId;
+  return true;
 });

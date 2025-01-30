@@ -30,15 +30,6 @@ function GamesGrid({ games, variant, className }: Props) {
         {games.map((game) => (
           <GameCard game={game} key={game.id} />
         ))}
-        {games.map((game) => (
-          <GameCard game={game} key={game.id} />
-        ))}
-        {games.map((game) => (
-          <GameCard game={game} key={game.id} />
-        ))}
-        {games.map((game) => (
-          <GameCard game={game} key={game.id} />
-        ))}
       </div>
     </>
   );

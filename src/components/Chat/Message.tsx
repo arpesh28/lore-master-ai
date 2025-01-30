@@ -7,7 +7,6 @@ import { memo, useState } from "react";
 
 import { cn } from "@/lib/utils";
 import { SparklesIcon } from "../ui/Icons";
-import { PreviewAttachment } from "./PreviewAttachment";
 
 const PurePreviewMessage = ({
   chatId,
@@ -54,17 +53,6 @@ const PurePreviewMessage = ({
           )}
 
           <div className="flex flex-col gap-2 w-full">
-            {message.experimental_attachments && (
-              <div className="flex flex-row justify-end gap-2">
-                {message.experimental_attachments.map((attachment) => (
-                  <PreviewAttachment
-                    key={attachment.url}
-                    attachment={attachment}
-                  />
-                ))}
-              </div>
-            )}
-
             {message.content && mode === "view" && (
               <div className="flex flex-row gap-2 items-start">
                 <div

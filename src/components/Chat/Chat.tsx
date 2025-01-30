@@ -14,52 +14,35 @@ import { MultimodalInput as Input } from "../Chat/Input";
 export function Chat({
   id,
   initialMessages,
-  selectedModelId,
   isReadonly,
 }: {
   id: string;
   initialMessages: Array<Message>;
-  selectedModelId: string;
   isReadonly: boolean;
 }) {
-  const { mutate } = useSWRConfig();
-
   const {
     messages,
-    setMessages,
-    handleSubmit,
     input,
-    setInput,
-    append,
-    isLoading,
-    stop,
+    handleInputChange,
+    handleSubmit,
+    setMessages,
     reload,
+    setInput,
+    isLoading,
+    append,
   } = useChat({
     id,
-    body: { id, modelId: selectedModelId },
-    initialMessages,
-    experimental_throttle: 100,
-    sendExtraMessageFields: true,
     generateId: generateUUID,
-    onFinish: () => {
-      mutate("/api/history");
-    },
   });
-
-  const [attachments, setAttachments] = useState<Array<Attachment>>([]);
 
   return (
     <>
       <div className="flex flex-col min-w-0 h-dvh bg-background">
-        <ChatHeader
-          chatId={id}
-          selectedModelId={selectedModelId}
-          isReadonly={isReadonly}
-        />
+        <ChatHeader chatId={id} isReadonly={isReadonly} />
 
         <Messages
           chatId={id}
-          isLoading={isLoading}
+          isLoading={true}
           messages={messages}
           setMessages={setMessages}
           reload={reload}
@@ -75,8 +58,6 @@ export function Chat({
               handleSubmit={handleSubmit}
               isLoading={isLoading}
               stop={stop}
-              attachments={attachments}
-              setAttachments={setAttachments}
               messages={messages}
               setMessages={setMessages}
               append={append}

@@ -1,12 +1,12 @@
 import GamesGrid from "@/components/Games/GamesGrid";
 import { GameCardProps } from "@/types/Game";
 // import FeaturedSection from "./FeaturedSection";
-type Props = {
+type HomeProps = {
   params: { slug: string };
   searchParams?: { [key: string]: string | string[] | undefined };
 };
 
-export default async function Home({ params, searchParams }: Props) {
+export default async function Home({ params, searchParams }: HomeProps) {
   // const page = Number(searchParams?.page) || 1;
   // const { data } = await useGames(page);
   const games: GameCardProps[] = [
@@ -29,11 +29,9 @@ export default async function Home({ params, searchParams }: Props) {
   ];
   return (
     <main>
-      <>
-        {/* <FeaturedSection /> */}
-        <h2 className=" font-medium text-2xl my-6 mt-16">Featured games</h2>
-        <GamesGrid games={games} />
-      </>
+      {/* <FeaturedSection /> */}
+      <h2 className=" font-medium text-2xl my-6 mt-16">Featured games</h2>
+      <GamesGrid games={games} />
     </main>
   );
 }

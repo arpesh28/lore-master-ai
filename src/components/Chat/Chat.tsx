@@ -30,6 +30,7 @@ export function Chat({
     setInput,
     isLoading,
     append,
+    stop,
   } = useChat({
     id,
     generateId: generateUUID,

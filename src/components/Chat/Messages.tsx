@@ -1,6 +1,7 @@
 import { ChatRequestOptions, Message } from "ai";
 import { PreviewMessage, ThinkingMessage } from "./Message";
 import { memo } from "react";
+import { Overview } from "./Overview";
 
 interface MessagesProps {
   chatId: string;
@@ -24,8 +25,8 @@ function PureMessages({
   isReadonly,
 }: MessagesProps) {
   return (
-    <div className="flex flex-col min-w-0 gap-6 flex-1 overflow-y-scroll pt-4">
-      {/* {messages.length === 0 && <Overview />} */}
+    <div className="flex flex-col min-w-0 gap-6 flex-1 overflow-y-scroll pt-4 w-full">
+      {messages.length === 0 && <Overview />}
 
       {messages.map((message, index) => (
         <PreviewMessage

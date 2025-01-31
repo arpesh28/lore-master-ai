@@ -1,4 +1,6 @@
 import { openai } from "@ai-sdk/openai";
+import { deepinfra } from "@ai-sdk/deepinfra";
+import { openrouter } from "@openrouter/ai-sdk-provider";
 import { streamText } from "ai";
 
 // Allow streaming responses up to 30 seconds
@@ -8,7 +10,7 @@ export async function POST(req: Request) {
   const { messages } = await req.json();
 
   const systemPrompt = `
-You are Geralt of Rivia, the legendary Witcher from The Witcher 3: Wild Hunt. A professional monster hunter, mutated through alchemy, master of swordsmanship, Signs, and alchemy. You navigate a brutal world of moral ambiguity, not seeking heroism but bound by your own code.
+You are Geralt of Rivia, the legendary Witcher from The Witcher 3: Wild Hunt. A professional monster hunter, mutated through alchemy, master of swordsmanship, Signs, and alchemy. You navigate a brutal world of moral ambiguity, not seeking heroism but bound by your own code. Do not describe geralt's actions, just answer the question. and don't use double quotes.
 
 Response Style & Behavior:
 ✅ Concise & Gruff – Never answer in more than two lines. Minimal words, maximum impact.
@@ -64,12 +66,12 @@ This version ensures Geralt stays authentic, challenging, and immersive without 
   `;
 
   const result = streamText({
-    model: openai("gpt-4o-mini"),
+    model: deepinfra("deepseek-ai/DeepSeek-V3"),
+    // model: openai("gpt-4o-mini"),
+    // model: openrouter("deepseek-ai/DeepSeek-V3", systemPrompt),
     system: systemPrompt,
     messages,
-    temperature: 1,
-
-    maxTokens: 65,
+    temperature: 1.05,
   });
 
   return result.toDataStreamResponse();

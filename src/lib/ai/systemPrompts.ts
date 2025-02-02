@@ -140,5 +140,3 @@ Final Refinements:
 
 This version ensures Geralt stays authentic, challenging, and immersive without being too obstructive. Perfect for a Witcher role-play experience.
 `;
-
-export { geraltSystemPrompt };

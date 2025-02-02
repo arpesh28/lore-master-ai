@@ -13,6 +13,7 @@ const PurePreviewMessage = ({
   message,
   reload,
   isReadonly,
+  voice,
 }: {
   chatId: string;
   message: Message;
@@ -24,6 +25,7 @@ const PurePreviewMessage = ({
     chatRequestOptions?: ChatRequestOptions
   ) => Promise<string | null | undefined>;
   isReadonly: boolean;
+  voice: string[];
 }) => {
   const [mode, setMode] = useState<"view" | "edit">("view");
 
@@ -55,6 +57,11 @@ const PurePreviewMessage = ({
           <div className="flex flex-col gap-2 w-full">
             {message.content && mode === "view" && (
               <div className="flex flex-row gap-2 items-start">
+                {message.role === "assistant" && (
+                  <audio controls autoPlay>
+                    <source src={voice?.[0]} type="audio/mpeg" />
+                  </audio>
+                )}
                 <div
                   className={cn("flex flex-col gap-4", {
                     "bg-primaryMessage text-primaryMessage-foreground px-3 py-2 rounded-xl":
@@ -78,8 +85,6 @@ export const PreviewMessage = memo(
     if (prevProps.isLoading !== nextProps.isLoading) return false;
     if (prevProps.message.content !== nextProps.message.content) return false;
     return false;
-
-    return true;
   }
 );
 

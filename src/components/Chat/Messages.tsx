@@ -2,6 +2,7 @@ import { ChatRequestOptions, Message } from "ai";
 import { PreviewMessage, ThinkingMessage } from "./Message";
 import { memo } from "react";
 import { Overview } from "./Overview";
+import React from "react";
 
 interface MessagesProps {
   chatId: string;
@@ -15,6 +16,8 @@ interface MessagesProps {
   ) => Promise<string | null | undefined>;
   isReadonly: boolean;
   voice: string[];
+  audioMap: { [key: string]: string };
+  currentlyPlayingId: string | null;
 }
 
 function PureMessages({
@@ -25,22 +28,38 @@ function PureMessages({
   reload,
   isReadonly,
   voice,
+  audioMap,
+  currentlyPlayingId,
 }: MessagesProps) {
   return (
     <div className="flex flex-col min-w-0 gap-6 flex-1 overflow-y-scroll pt-4 w-full">
       {messages.length === 0 && <Overview />}
 
       {messages.map((message, index) => (
-        <PreviewMessage
-          key={message.id}
-          chatId={chatId}
-          message={message}
-          isLoading={isLoading && messages.length - 1 === index}
-          setMessages={setMessages}
-          reload={reload}
-          isReadonly={isReadonly}
-          voice={voice}
-        />
+        <div key={message.id}>
+          <PreviewMessage
+            chatId={chatId}
+            message={message}
+            isLoading={isLoading && messages.length - 1 === index}
+            setMessages={setMessages}
+            reload={reload}
+            isReadonly={isReadonly}
+            voice={voice}
+          />
+          {message.role === "assistant" && audioMap[message.id] && (
+            <button
+              onClick={() => {
+                const audio = new Audio(audioMap[message.id]);
+                audio.play();
+              }}
+              style={{
+                color: currentlyPlayingId === message.id ? "red" : "blue",
+              }}
+            >
+              {currentlyPlayingId === message.id ? "Playing" : "Play"}
+            </button>
+          )}
+        </div>
       ))}
 
       {isLoading &&

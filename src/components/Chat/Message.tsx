@@ -57,11 +57,6 @@ const PurePreviewMessage = ({
           <div className="flex flex-col gap-2 w-full">
             {message.content && mode === "view" && (
               <div className="flex flex-row gap-2 items-start">
-                {message.role === "assistant" && (
-                  <audio controls autoPlay>
-                    <source src={voice?.[0]} type="audio/mpeg" />
-                  </audio>
-                )}
                 <div
                   className={cn("flex flex-col gap-4", {
                     "bg-primaryMessage text-primaryMessage-foreground px-3 py-2 rounded-xl":

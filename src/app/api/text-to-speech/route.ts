@@ -15,9 +15,9 @@ export async function POST(request: Request) {
         },
         body: JSON.stringify({
           text: text,
-          model_id: "eleven_multilingual_v2",
+          model_id: "eleven_flash_v2",
           voice_settings: {
-            stability: 0.8,
+            stability: 0.65,
             similarity_boost: 1,
             use_speaker_boost: true,
             style: 0.45,

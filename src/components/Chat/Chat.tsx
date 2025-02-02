@@ -2,7 +2,7 @@
 
 import type { Attachment, Message } from "ai";
 import { useChat } from "ai/react";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSWRConfig } from "swr";
 import fs from "fs";
 import path from "path";
@@ -24,6 +24,11 @@ export function Chat({
 }) {
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [voice, setVoice] = useState<string[] | []>([]);
+  const [audioMap, setAudioMap] = useState<{ [key: string]: string }>({});
+  const [currentlyPlayingId, setCurrentlyPlayingId] = useState<string | null>(
+    null
+  );
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const {
     messages,
@@ -42,7 +47,8 @@ export function Chat({
     onFinish: async (message, options) => {
       const audio = await textToSpeech(message.content);
       setAudioUrl(audio);
-      setVoice((prev) => [...prev, audio]);
+      setAudioMap((prev) => ({ ...prev, [message.id]: audio }));
+      playAudio(audio, message.id);
     },
   });
 
@@ -61,14 +67,32 @@ export function Chat({
 
     const data = await response.json();
 
-    return data.url; // Return the audio URL from the API response
+    return data.url;
   }
 
-  const playAudio = () => {
-    if (audioUrl) {
-      const audio = new Audio(audioUrl);
-      audio.play();
+  const toggleAudio = (action: "play" | "pause") => {
+    switch (action) {
+      case "play":
+        if (audioUrl) {
+          playAudio(audioUrl, currentlyPlayingId ?? "");
+        }
+        break;
+      case "pause":
+        const audio = new Audio(audioUrl ?? undefined);
+        audio.pause();
+        break;
+      default:
+        console.error("Invalid action");
     }
+  };
+
+  const playAudio = (url: string, messageId: string) => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+    }
+    audioRef.current = new Audio(url);
+    audioRef.current.play();
+    setCurrentlyPlayingId(messageId);
   };
 
   return (
@@ -84,12 +108,10 @@ export function Chat({
           reload={reload}
           isReadonly={isReadonly}
           voice={voice}
+          audioMap={audioMap}
+          currentlyPlayingId={currentlyPlayingId}
         />
-        {audioUrl && (
-          <audio controls autoPlay>
-            <source src={audioUrl} type="audio/mpeg" />
-          </audio>
-        )}
+
         <form className="flex mx-auto px-4 bg-background pb-4 md:pb-6 gap-2 w-full md:max-w-3xl">
           {!isReadonly && (
             <Input

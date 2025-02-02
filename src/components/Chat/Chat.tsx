@@ -46,11 +46,18 @@ export function Chat({
     generateId: generateUUID,
     onFinish: async (message, options) => {
       const audio = await textToSpeech(message.content);
-      setAudioUrl(audio);
       setAudioMap((prev) => ({ ...prev, [message.id]: audio }));
-      playAudio(audio, message.id);
     },
   });
+
+  useEffect(() => {
+    if (Object.keys(audioMap).length > 0) {
+      const lastKey = Object.keys(audioMap).pop();
+      if (lastKey) {
+        toggleAudio(lastKey);
+      }
+    }
+  }, [Object.keys(audioMap).length]);
 
   async function textToSpeech(text: string) {
     const response = await fetch("/api/text-to-speech", {
@@ -70,29 +77,22 @@ export function Chat({
     return data.url;
   }
 
-  const toggleAudio = (action: "play" | "pause") => {
-    switch (action) {
-      case "play":
-        if (audioUrl) {
-          playAudio(audioUrl, currentlyPlayingId ?? "");
-        }
-        break;
-      case "pause":
-        const audio = new Audio(audioUrl ?? undefined);
-        audio.pause();
-        break;
-      default:
-        console.error("Invalid action");
-    }
-  };
-
-  const playAudio = (url: string, messageId: string) => {
+  const toggleAudio = (messageId: string) => {
     if (audioRef.current) {
-      audioRef.current.pause();
+      if (currentlyPlayingId === messageId) {
+        audioRef.current.pause();
+        setCurrentlyPlayingId(null);
+      } else {
+        audioRef.current.pause();
+        audioRef.current = new Audio(audioMap[messageId]);
+        audioRef.current.play();
+        setCurrentlyPlayingId(messageId);
+      }
+    } else {
+      audioRef.current = new Audio(audioMap[messageId]);
+      audioRef.current.play();
+      setCurrentlyPlayingId(messageId);
     }
-    audioRef.current = new Audio(url);
-    audioRef.current.play();
-    setCurrentlyPlayingId(messageId);
   };
 
   return (
@@ -110,6 +110,7 @@ export function Chat({
           voice={voice}
           audioMap={audioMap}
           currentlyPlayingId={currentlyPlayingId}
+          toggleAudio={toggleAudio}
         />
 
         <form className="flex mx-auto px-4 bg-background pb-4 md:pb-6 gap-2 w-full md:max-w-3xl">

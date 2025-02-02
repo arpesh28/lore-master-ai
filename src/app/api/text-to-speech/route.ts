@@ -17,7 +17,7 @@ export async function POST(request: Request) {
           text: text,
           model_id: "eleven_flash_v2",
           voice_settings: {
-            stability: 0.65,
+            stability: 0.9,
             similarity_boost: 1,
             use_speaker_boost: true,
             style: 0.45,

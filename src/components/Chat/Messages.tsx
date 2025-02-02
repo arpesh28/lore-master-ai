@@ -18,6 +18,7 @@ interface MessagesProps {
   voice: string[];
   audioMap: { [key: string]: string };
   currentlyPlayingId: string | null;
+  toggleAudio: (messageId: string) => void;
 }
 
 function PureMessages({
@@ -30,6 +31,7 @@ function PureMessages({
   voice,
   audioMap,
   currentlyPlayingId,
+  toggleAudio,
 }: MessagesProps) {
   return (
     <div className="flex flex-col min-w-0 gap-6 flex-1 overflow-y-scroll pt-4 w-full">
@@ -49,8 +51,9 @@ function PureMessages({
           {message.role === "assistant" && audioMap[message.id] && (
             <button
               onClick={() => {
-                const audio = new Audio(audioMap[message.id]);
-                audio.play();
+                if (audioMap[message.id]) {
+                  toggleAudio(message.id);
+                }
               }}
               style={{
                 color: currentlyPlayingId === message.id ? "red" : "blue",

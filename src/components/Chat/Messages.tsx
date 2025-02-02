@@ -14,6 +14,7 @@ interface MessagesProps {
     chatRequestOptions?: ChatRequestOptions
   ) => Promise<string | null | undefined>;
   isReadonly: boolean;
+  voice: string[];
 }
 
 function PureMessages({
@@ -23,6 +24,7 @@ function PureMessages({
   setMessages,
   reload,
   isReadonly,
+  voice,
 }: MessagesProps) {
   return (
     <div className="flex flex-col min-w-0 gap-6 flex-1 overflow-y-scroll pt-4 w-full">
@@ -37,6 +39,7 @@ function PureMessages({
           setMessages={setMessages}
           reload={reload}
           isReadonly={isReadonly}
+          voice={voice}
         />
       ))}
 

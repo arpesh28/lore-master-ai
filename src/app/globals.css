@@ -200,3 +200,27 @@ body {
 .suggestion-highlight {
   @apply bg-blue-200 hover:bg-blue-300 dark:hover:bg-blue-400/50 dark:text-blue-50 dark:bg-blue-500/40;
 }
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #374151 transparent;
+}
+
+/* For Webkit browsers like Chrome/Safari */
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #374151;
+  border-radius: 20px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #4b5563;
+}

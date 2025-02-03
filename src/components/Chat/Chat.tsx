@@ -91,6 +91,9 @@ export function Chat({
     } else {
       audioRef.current = new Audio(audioMap[messageId]);
       audioRef.current.play();
+      audioRef.current.addEventListener("ended", () => {
+        setCurrentlyPlayingId(null);
+      });
       setCurrentlyPlayingId(messageId);
     }
   };

@@ -2,7 +2,7 @@ import React from "react";
 import CharacterCard from "./CharacterCard";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
-import { CharacterCardProps } from "@/types/Game";
+import { CharacterCardProps } from "@/lib/characters";
 
 const gridVariants = cva("grid gap-4", {
   variants: {

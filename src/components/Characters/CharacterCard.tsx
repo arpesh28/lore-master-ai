@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { AspectRatio } from "@/components/ui/AspectRation";
-import { CharacterCardProps } from "@/types/Game";
+import { CharacterCardProps } from "@/lib/characters";
 
 type Props = {
   character: CharacterCardProps;

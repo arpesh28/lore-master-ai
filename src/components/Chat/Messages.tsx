@@ -3,6 +3,7 @@ import { PreviewMessage, ThinkingMessage } from "./Message";
 import { memo } from "react";
 import { Overview } from "./Overview";
 import React from "react";
+import Image from "next/image";
 
 interface MessagesProps {
   chatId: string;
@@ -47,21 +48,10 @@ function PureMessages({
             reload={reload}
             isReadonly={isReadonly}
             voice={voice}
+            audioMap={audioMap}
+            currentlyPlayingId={currentlyPlayingId}
+            toggleAudio={toggleAudio}
           />
-          {message.role === "assistant" && audioMap[message.id] && (
-            <button
-              onClick={() => {
-                if (audioMap[message.id]) {
-                  toggleAudio(message.id);
-                }
-              }}
-              style={{
-                color: currentlyPlayingId === message.id ? "red" : "blue",
-              }}
-            >
-              {currentlyPlayingId === message.id ? "Playing" : "Play"}
-            </button>
-          )}
         </div>
       ))}
 

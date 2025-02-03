@@ -36,6 +36,9 @@ export default {
           DEFAULT: "hsl(var(--primary-text))",
           foreground: "hsl(var(--primary-text-foreground))",
         },
+        primaryMessageAssistant: {
+          DEFAULT: "hsl(var(--primary-text-assistant))",
+        },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",

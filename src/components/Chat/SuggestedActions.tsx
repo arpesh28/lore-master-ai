@@ -18,23 +18,24 @@ function PureSuggestedActions({ chatId, append }: SuggestedActionsProps) {
     {
       title: "I’ve got a contract to kill a griffin. ",
       label: "ny advice?",
-      action: "I’ve got a contract to kill a griffin. Any advice?",
+      action:
+        "What do you think about Yennefer and Triss? Do you love one more than the other?",
     },
     {
       title: "A village asked me to hunt a werewolf",
       label: `but I think it’s cursed. Can you do it for me?`,
-      action: `A village asked me to hunt a werewolf, but I think it’s cursed. Can you do it for me?`,
+      action: `On a scale of 1 to 10, how much does Dandelion annoy you?`,
     },
     {
       title: "Yennefer is in danger.",
       label: `But she doesn't want your help. Even if she die`,
-      action: `Yennefer is in danger. But she doesn't want your help. Even if she die`,
+      action: `Wind’s howling, Geralt. Do you ever get tired of saying that?`,
     },
     {
       title: "A monster’s lurking around the corner, ",
       label: "but the coin’s good. You in or out?",
       action:
-        "A monster’s lurking around the corner, but the coin’s good. You in or out?",
+        "How many times has Yennefer set something on fire just because she was mad?",
     },
   ];
 
@@ -61,9 +62,8 @@ function PureSuggestedActions({ chatId, append }: SuggestedActionsProps) {
             }}
             className="text-left border rounded-xl px-4 py-3.5 text-sm flex-1 gap-1 sm:flex-col w-full h-auto justify-start items-start"
           >
-            <span className="font-medium">{suggestedAction.title}</span>
-            <span className="text-muted-foreground">
-              {suggestedAction.label}
+            <span className="font-medium text-wrap">
+              {suggestedAction.action}
             </span>
           </Button>
         </motion.div>

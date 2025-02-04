@@ -1,7 +1,11 @@
 import CharactersGrid from "@/components/Characters/CharactersGrid";
 import { characters } from "@/lib/characters";
+import { redirect } from "next/navigation";
 
 export default async function Characters() {
+  if (typeof window === "undefined") {
+    redirect("/chat/geralt");
+  }
   return (
     <main>
       <>

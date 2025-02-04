@@ -3,7 +3,7 @@ import React from "react";
 
 export default function Home() {
   if (typeof window === "undefined") {
-    redirect("/characters");
+    redirect("/chat/geralt");
   }
   return <div>Home</div>;
 }

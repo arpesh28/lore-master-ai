@@ -30,12 +30,7 @@ export function AppSidebar() {
               {characters.map((item) => (
                 <SidebarMenuItem key={item.name}>
                   <SidebarMenuButton className="h-14" asChild>
-                    <a
-                      href={`/chat/${item.slug}`}
-                      className={`bg-[#2a2a2a] ${
-                        slug === item.slug ? "bg-gray-100" : ""
-                      }`}
-                    >
+                    <a href={`/chat/${item.slug}`} className={`bg-[#2a2a2a]`}>
                       <div className="w-10 h-10 rounded-full overflow-hidden ">
                         <Image
                           src={item.background_image}

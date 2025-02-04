@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Button } from "../ui/Button";
+import { Button } from "../ui-radix/Button";
 import { ChatRequestOptions, CreateMessage, Message } from "ai";
 import { memo } from "react";
 

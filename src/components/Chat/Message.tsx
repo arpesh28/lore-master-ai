@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { memo, useState } from "react";
 
 import { cn } from "@/lib/utils";
-import { SparklesIcon } from "../ui/Icons";
+import { SparklesIcon } from "../ui-radix/Icons";
 import Image from "next/image";
 
 const PurePreviewMessage = ({
@@ -79,10 +79,6 @@ const PurePreviewMessage = ({
                           if (audioMap[message.id]) {
                             toggleAudio(message.id);
                           }
-                        }}
-                        style={{
-                          color:
-                            currentlyPlayingId === message.id ? "red" : "blue",
                         }}
                       >
                         {currentlyPlayingId ? (

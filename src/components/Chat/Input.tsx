@@ -18,9 +18,9 @@ import {
 } from "react";
 import { toast } from "sonner";
 
-import { Button } from "../ui/Button";
-import { ArrowUpIcon, PaperclipIcon, StopIcon } from "../ui/Icons";
-import { Textarea } from "../ui/Textarea";
+import { Button } from "../ui-radix/Button";
+import { ArrowUpIcon, PaperclipIcon, StopIcon } from "../ui-radix/Icons";
+import { Textarea } from "../ui-radix/Textarea";
 import { PreviewAttachment } from "./PreviewAttachment";
 import { SuggestedActions } from "./SuggestedActions";
 

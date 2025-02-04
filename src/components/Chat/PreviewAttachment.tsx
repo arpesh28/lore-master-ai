@@ -1,6 +1,6 @@
 import type { Attachment } from "ai";
 
-import { LoaderIcon } from "../ui/Icons";
+import { LoaderIcon } from "../ui-radix/Icons";
 
 export const PreviewAttachment = ({
   attachment,

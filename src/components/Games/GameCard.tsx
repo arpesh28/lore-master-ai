@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { AspectRatio } from "@/components/ui/AspectRation";
+import { AspectRatio } from "@/components/ui-radix/AspectRation";
 import { GameCardProps } from "@/types/Game";
 
 type Props = {

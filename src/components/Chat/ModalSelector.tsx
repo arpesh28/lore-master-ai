@@ -3,17 +3,17 @@
 import { startTransition, useMemo, useOptimistic, useState } from "react";
 
 // import { saveModelId } from "@/app/(chat)/actions";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui-radix/Button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/DropdownMenu";
+} from "@/components/ui-radix/DropdownMenu";
 import { models } from "@/lib/ai/models";
 import { cn } from "@/lib/utils";
 
-import { CheckCircleFillIcon, ChevronDownIcon } from "../ui/Icons";
+import { CheckCircleFillIcon, ChevronDownIcon } from "../ui-radix/Icons";
 
 export function ModelSelector({
   selectedModelId,

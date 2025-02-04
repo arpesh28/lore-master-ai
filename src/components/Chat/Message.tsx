@@ -80,10 +80,6 @@ const PurePreviewMessage = ({
                             toggleAudio(message.id);
                           }
                         }}
-                        style={{
-                          color:
-                            currentlyPlayingId === message.id ? "red" : "blue",
-                        }}
                       >
                         {currentlyPlayingId ? (
                           <Image

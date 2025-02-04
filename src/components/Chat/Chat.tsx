@@ -78,25 +78,32 @@ export function Chat({
   }
 
   const toggleAudio = (messageId: string) => {
+    const handleEnded = () => {
+      setCurrentlyPlayingId(null);
+    };
+
     if (audioRef.current) {
       if (currentlyPlayingId === messageId) {
         audioRef.current.pause();
+        audioRef.current.removeEventListener("ended", handleEnded);
         setCurrentlyPlayingId(null);
       } else {
         audioRef.current.pause();
+        audioRef.current.removeEventListener("ended", handleEnded);
         audioRef.current = new Audio(audioMap[messageId]);
         audioRef.current.play();
+        audioRef.current.addEventListener("ended", handleEnded);
         setCurrentlyPlayingId(messageId);
       }
     } else {
       audioRef.current = new Audio(audioMap[messageId]);
       audioRef.current.play();
-      audioRef.current.addEventListener("ended", () => {
-        setCurrentlyPlayingId(null);
-      });
+      audioRef.current.addEventListener("ended", handleEnded);
       setCurrentlyPlayingId(messageId);
     }
   };
+
+  console.log("currentPlayingId:", currentlyPlayingId);
 
   return (
     <>

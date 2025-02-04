@@ -1,4 +1,4 @@
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
+"use client";
 
 import {
   Sidebar,
@@ -12,16 +12,14 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
-// Menu items.
-const items = [
-  {
-    title: "Geralt",
-    url: "/chat/geralt",
-    icon: Home,
-  },
-];
+import Image from "next/image";
+import { characters } from "@/lib/characters";
+import { usePathname } from "next/navigation";
 
 export function AppSidebar() {
+  const pathname = usePathname();
+  const slug = pathname.split("/").pop(); // Assuming the slug is the last part of the path
+
   return (
     <Sidebar>
       <SidebarContent>
@@ -29,12 +27,25 @@ export function AppSidebar() {
           <SidebarHeader>Lore Characters</SidebarHeader>
           <SidebarGroupContent>
             <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <a href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
+              {characters.map((item) => (
+                <SidebarMenuItem key={item.name}>
+                  <SidebarMenuButton className="h-14" asChild>
+                    <a
+                      href={`/chat/${item.slug}`}
+                      className={`bg-[#2a2a2a] ${
+                        slug === item.slug ? "bg-gray-100" : ""
+                      }`}
+                    >
+                      <div className="w-10 h-10 rounded-full overflow-hidden ">
+                        <Image
+                          src={item.background_image}
+                          alt={item.name}
+                          width={40}
+                          height={40}
+                          objectFit="cover"
+                        />
+                      </div>
+                      <span>{item.name}</span>
                     </a>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
